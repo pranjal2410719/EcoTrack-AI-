@@ -1,6 +1,16 @@
 # Development Log
 
-## v1.0.0 — Initial MVP
+## v1.2.0 — Feature Expansion (June 9, 2026)
+
+- AI Climate Coach chat page with Gemini-powered conversations
+- Carbon Reduction Simulator for before/after comparisons
+- Sustainability Goals tracking on dashboard
+- Route-based code splitting via React.lazy + Suspense
+- React.memo on chart, score card, recommendation components
+- Comprehensive JSDoc across all backend modules
+- docs/ folder with ARCHITECTURE.md, API_REFERENCE.md, DATABASE_SCHEMA.md
+
+## v1.1.0 — Architecture & Testing Upgrade (June 9, 2026)
 
 ### Week 1 — Foundation
 - Set up Express.js backend with Supabase integration

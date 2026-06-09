@@ -1,26 +1,34 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import Home from "./pages/Home";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import Assessment from "./pages/Assessment";
-import Dashboard from "./pages/Dashboard";
+import { lazy, Suspense } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PageSkeleton from "./components/PageSkeleton";
+import AssessmentSkeleton from "./components/AssessmentSkeleton";
+import DashboardSkeleton from "./components/DashboardSkeleton";
+
+// Lazy-loaded pages for code splitting
+const Home = lazy(() => import("./pages/Home"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
+const Assessment = lazy(() => import("./pages/Assessment"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Coach = lazy(() => import("./pages/Coach"));
+const Simulator = lazy(() => import("./pages/Simulator"));
 
 export default function App() {
   return (
     <Routes>
       {/* ── Public routes (with Navbar + Footer) ── */}
       <Route element={<RootLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Suspense fallback={<PageSkeleton />}><Home /></Suspense>} />
 
         {/* Protected routes share the same RootLayout (Navbar visible) */}
         <Route
           path="/assessment"
           element={
             <ProtectedRoute>
-              <Assessment />
+              <Suspense fallback={<AssessmentSkeleton />}><Assessment /></Suspense>
             </ProtectedRoute>
           }
         />
@@ -28,7 +36,23 @@ export default function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Suspense fallback={<DashboardSkeleton />}><Dashboard /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/coach"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<PageSkeleton />}><Coach /></Suspense>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/simulator"
+          element={
+            <ProtectedRoute>
+              <Suspense fallback={<PageSkeleton />}><Simulator /></Suspense>
             </ProtectedRoute>
           }
         />
@@ -36,8 +60,8 @@ export default function App() {
 
       {/* ── Auth routes (no Navbar, centered card layout) ── */}
       <Route element={<AuthLayout />}>
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<Suspense fallback={<PageSkeleton />}><SignInPage /></Suspense>} />
+        <Route path="/sign-up" element={<Suspense fallback={<PageSkeleton />}><SignUpPage /></Suspense>} />
       </Route>
 
       {/* ── Catch-all: redirect unknown paths to home ── */}

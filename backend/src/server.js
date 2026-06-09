@@ -6,6 +6,8 @@ const assessmentRoutes = require("./routes/assessment");
 const calculateRoutes = require("./routes/calculate");
 const aiRoutes = require("./routes/ai");
 const dashboardRoutes = require("./routes/dashboard");
+const coachRoutes = require("./routes/coach");
+const simulatorRoutes = require("./routes/simulator");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -29,6 +31,8 @@ app.use("/api/assessment", assessmentRoutes);
 app.use("/api/calculate", calculateRoutes);
 app.use("/api/analyze", aiRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/coach", coachRoutes);
+app.use("/api/simulate", simulatorRoutes);
 
 // 404 handler — must be after all route definitions
 app.use("/api", (req, res) => {

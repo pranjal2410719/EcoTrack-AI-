@@ -6,6 +6,7 @@ import CarbonScoreCard from "../components/CarbonScoreCard";
 import EmissionChart from "../components/EmissionChart";
 import RecommendationCard from "../components/RecommendationCard";
 import DashboardSkeleton from "../components/DashboardSkeleton";
+import GoalsSection from "../components/GoalsSection";
 import { showError } from "../utils/toast";
 
 export default function Dashboard() {
@@ -164,6 +165,11 @@ export default function Dashboard() {
       <div className="grid lg:grid-cols-2 gap-6 mb-6">
         <EmissionChart breakdown={latestAssessment.breakdown} />
         <RecommendationCard analysis={recommendations} />
+      </div>
+
+      {/* Goals Section */}
+      <div className="mb-6">
+        <GoalsSection latestAssessment={latestAssessment} />
       </div>
 
       {history && history.length > 0 && (

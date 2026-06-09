@@ -28,7 +28,9 @@ const levelConfig = {
   },
 };
 
-export default function CarbonScoreCard({ score, level, breakdown }) {
+import { memo } from "react";
+
+const CarbonScoreCard = memo(function CarbonScoreCard({ score, level, breakdown }) {
   const config = levelConfig[level] || levelConfig.Moderate;
 
   return (
@@ -70,4 +72,6 @@ export default function CarbonScoreCard({ score, level, breakdown }) {
       )}
     </div>
   );
-}
+});
+
+export default CarbonScoreCard;

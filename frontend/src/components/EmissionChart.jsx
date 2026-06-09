@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
 const COLORS = {
@@ -16,7 +17,7 @@ const LABELS = {
   diet: "Food",
 };
 
-export default function EmissionChart({ breakdown }) {
+const EmissionChart = memo(function EmissionChart({ breakdown }) {
   if (!breakdown) {
     return (
       <div className="card text-center py-8">
@@ -92,4 +93,6 @@ export default function EmissionChart({ breakdown }) {
       </div>
     </div>
   );
-}
+});
+
+export default EmissionChart;

@@ -1,10 +1,28 @@
 /**
- * Authentication middleware using Supabase JWT verification.
- * Verifies the JWT from the Authorization header using Supabase's getUser API.
+ * Authentication Middleware
+ * Verifies Supabase JWT tokens from the Authorization header.
+ *
+ * @module middleware/auth
  */
 
 const supabase = require("../config/supabase");
 
+/**
+ * Authenticate requests using Supabase JWT verification.
+ *
+ * Extracts the Bearer token from the Authorization header,
+ * verifies it with Supabase's getUser API, and attaches
+ * the user object to the request for downstream handlers.
+ *
+ * @param {import("express").Request} req - Express request object
+ * @param {import("express").Response} res - Express response object
+ * @param {import("express").NextFunction} next - Express next middleware function
+ *
+ * @returns {void}
+ *
+ * @example
+ * router.get("/protected", authenticate, handler);
+ */
 async function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
 
@@ -18,7 +36,6 @@ async function authenticate(req, res, next) {
   const token = authHeader.split(" ")[1];
 
   try {
-    // Verify the JWT with Supabase
     const { data: { user }, error } = await supabase.auth.getUser(token);
 
     if (error || !user) {

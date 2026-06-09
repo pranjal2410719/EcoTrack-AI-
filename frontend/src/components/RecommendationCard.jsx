@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
-export default function RecommendationCard({ analysis }) {
+const RecommendationCard = memo(function RecommendationCard({ analysis }) {
   const [expanded, setExpanded] = useState(false);
 
   if (!analysis) {
@@ -46,4 +46,6 @@ export default function RecommendationCard({ analysis }) {
       </button>
     </div>
   );
-}
+});
+
+export default RecommendationCard;

@@ -1,14 +1,6 @@
 const supabaseService = require("../services/supabaseService");
 const { createAuthedClient } = require("../config/supabase");
-
-/**
- * Compute carbon level from score.
- */
-function getLevel(score) {
-  if (score < 200) return "Low";
-  if (score < 500) return "Moderate";
-  return "High";
-}
+const { getLevel } = require("../services/carbonCalculator");
 
 /**
  * Compute category breakdown for an assessment.

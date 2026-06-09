@@ -35,4 +35,16 @@ export async function healthCheck() {
   return response.data;
 }
 
+// Coach endpoints
+export async function chatWithCoach({ message, history = [] }) {
+  const response = await api.post("/coach/chat", { message, history });
+  return response.data;
+}
+
+// Simulator endpoint
+export async function simulateReduction(current, target) {
+  const response = await api.post("/simulate", { current, target });
+  return response.data;
+}
+
 export default api;

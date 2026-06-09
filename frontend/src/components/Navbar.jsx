@@ -48,6 +48,18 @@ export default function Navbar() {
                 >
                   Dashboard
                 </Link>
+                <Link
+                  to="/coach"
+                  className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+                >
+                  AI Coach
+                </Link>
+                <Link
+                  to="/simulator"
+                  className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+                >
+                  Simulator
+                </Link>
                 <div className="flex items-center gap-3 ml-4 pl-4 border-l border-gray-200">
                   <span className="text-sm text-gray-500">
                     {user?.user_metadata?.name || user?.email?.split("@")[0] || "User"}
@@ -113,6 +125,20 @@ export default function Navbar() {
                   className="block py-2 text-gray-600 hover:text-gray-900 font-medium"
                 >
                   Dashboard
+                </Link>
+                <Link
+                  to="/coach"
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-2 text-gray-600 hover:text-gray-900 font-medium"
+                >
+                  AI Coach
+                </Link>
+                <Link
+                  to="/simulator"
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-2 text-gray-600 hover:text-gray-900 font-medium"
+                >
+                  Simulator
                 </Link>
                 <div className="pt-3 border-t border-gray-100">
                   <p className="text-sm text-gray-500 mb-2">
