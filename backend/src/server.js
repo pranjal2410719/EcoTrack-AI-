@@ -9,21 +9,37 @@ const dashboardRoutes = require("./routes/dashboard");
 const coachRoutes = require("./routes/coach");
 const simulatorRoutes = require("./routes/simulator");
 const errorHandler = require("./middleware/errorHandler");
+const { apiLimiter } = require("./middleware/rateLimit");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Global CORS configuration
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "http://localhost:5176",
+  "https://ecotrack0a.netlify.app",
+  "https://ecotrack-ai-tdq4.onrender.com",
+];
+
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "http://localhost:5176",
-  ],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (server-to-server, curl, etc.)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked origin: ${origin}`);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
+
+// Apply rate limiting to all API routes
+app.use("/api", apiLimiter);
 
 // Routes
 app.use("/api/health", healthRoutes);
