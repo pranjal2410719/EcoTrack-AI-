@@ -55,6 +55,7 @@ export default function Navbar() {
                   <button
                     onClick={handleSignOut}
                     className="btn-secondary !py-2 !px-4 text-sm"
+                    aria-label="Sign out of your account"
                   >
                     Sign Out
                   </button>
@@ -72,6 +73,8 @@ export default function Navbar() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileOpen ? (

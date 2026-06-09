@@ -28,5 +28,6 @@ lerna-debug.log*
 .DS_Store
 Thumbs.db
 
-# User requested exclusions (do not push context files)
-/context/
+# Code coverage reports
+coverage/
+backend/coverage/

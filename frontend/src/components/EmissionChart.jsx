@@ -54,9 +54,9 @@ export default function EmissionChart({ breakdown }) {
   };
 
   return (
-    <div className="card">
+    <div className="card" role="region" aria-label="Emission breakdown chart">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Emission Breakdown</h3>
-      <div className="h-[280px]">
+      <div className="h-[280px]" role="img" aria-label={`Emission breakdown: ${data.map(d => `${d.name}: ${d.value.toFixed(1)} kg`).join(", ")}`}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie

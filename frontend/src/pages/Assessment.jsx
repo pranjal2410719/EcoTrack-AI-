@@ -295,16 +295,20 @@ export default function Assessment() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          {/* Step dots */}
-          <div className="flex gap-2">
+          {/* Step dots */}                <nav className="flex gap-2" aria-label="Assessment progress">
             {STEPS.map((s, i) => (
               <div
                 key={s.id}
                 title={s.title}
                 className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${i === step ? "bg-primary-500" : done.has(i) ? "bg-primary-300" : "bg-gray-100"}`}
+                role="progressbar"
+                aria-valuenow={i <= step ? 100 : 0}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`Step ${i + 1}: ${s.title}`}
               />
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* ── Live score pill ── */}
@@ -352,6 +356,7 @@ export default function Assessment() {
           {/* Number input */}
           {current.type === "number" && (
             <div className="relative mb-2">
+              <label htmlFor={current.id} className="sr-only">{current.title}</label>
               <input
                 ref={inputRef}
                 id={current.id}
@@ -362,6 +367,7 @@ export default function Assessment() {
                 onChange={(e) => { setError(""); setFormData((p) => ({ ...p, [current.id]: e.target.value })); }}
                 onKeyDown={(e) => e.key === "Enter" && goNext()}
                 className="input-field text-lg font-semibold pr-32"
+                aria-describedby={`tip-${current.id}`}
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-gray-400 pointer-events-none">
                 {current.unit}
@@ -371,7 +377,7 @@ export default function Assessment() {
 
           {/* Choice input */}
           {current.type === "choice" && (
-            <div className="grid grid-cols-3 gap-3 mb-2">
+            <div className="grid grid-cols-3 gap-3 mb-2" role="radiogroup" aria-label={current.title}>
               {current.choices.map((c) => {
                 const sel = currentValue === c.value;
                 return (
@@ -379,6 +385,9 @@ export default function Assessment() {
                     key={c.value}
                     type="button"
                     onClick={() => { setError(""); setFormData((p) => ({ ...p, [current.id]: c.value })); }}
+                    role="radio"
+                    aria-checked={sel}
+                    aria-label={`${c.label}: ${c.desc}`}
                     className={`group flex flex-col items-center gap-2 p-4 rounded-xl border-2 text-center transition-all duration-200 focus:outline-none ${
                       sel ? `${c.border} ${c.bg}` : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
                     }`}
@@ -402,8 +411,8 @@ export default function Assessment() {
           )}
 
           {/* Eco tip */}
-          <div className="flex items-start gap-2 bg-primary-50 border border-primary-100 rounded-xl px-4 py-3 mt-4">
-            <span className="text-sm mt-0.5">💡</span>
+          <div className="flex items-start gap-2 bg-primary-50 border border-primary-100 rounded-xl px-4 py-3 mt-4" id={`tip-${current.id}`}>
+            <span className="text-sm mt-0.5" aria-hidden="true">💡</span>
             <p className="text-sm text-primary-700 leading-relaxed">{current.tip}</p>
           </div>
         </div>
@@ -415,6 +424,7 @@ export default function Assessment() {
               type="button"
               onClick={goBack}
               className="btn-secondary !py-3.5 !px-6"
+              aria-label="Go to previous question"
             >
               ← Back
             </button>
@@ -426,6 +436,7 @@ export default function Assessment() {
               onClick={goNext}
               disabled={!isValid}
               className="btn-primary flex-1 !py-3.5 text-base"
+              aria-label="Go to next question"
             >
               Next →
             </button>
@@ -435,6 +446,7 @@ export default function Assessment() {
               onClick={handleSubmit}
               disabled={!isValid}
               className="btn-primary flex-1 !py-3.5 text-base"
+              aria-label="Calculate my carbon footprint"
             >
               🌍 Calculate My Footprint
             </button>

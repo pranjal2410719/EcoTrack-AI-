@@ -30,11 +30,19 @@ app.use("/api/calculate", calculateRoutes);
 app.use("/api/analyze", aiRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
+// 404 handler — must be after all route definitions
+app.use("/api", (req, res) => {
+  res.status(404).json({ success: false, error: "Route not found" });
+});
+
 // Error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`EcoTrack AI backend running on port ${PORT}`);
-});
+// Start only when run directly (not when imported for testing)
+if (require.main === module) {
+  app.listen(PORT, () => {
+      console.log(`EcoTrack AI backend running on port ${PORT}`);
+  });
+}
 
 module.exports = app;

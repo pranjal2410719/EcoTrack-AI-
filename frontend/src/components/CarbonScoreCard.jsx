@@ -1,26 +1,26 @@
 const levelConfig = {
   Low: {
-    color: "text-green-600",
-    bg: "bg-green-50",
-    border: "border-green-200",
+    color: "text-green-700",
+    bg: "bg-green-100",
+    border: "border-green-300",
     icon: "🎉",
     label: "Low Impact",
     barColor: "bg-green-500",
     barWidth: "25%",
   },
   Moderate: {
-    color: "text-yellow-600",
-    bg: "bg-yellow-50",
-    border: "border-yellow-200",
+    color: "text-yellow-700",
+    bg: "bg-yellow-100",
+    border: "border-yellow-300",
     icon: "🌿",
     label: "Moderate Impact",
     barColor: "bg-yellow-500",
     barWidth: "55%",
   },
   High: {
-    color: "text-red-600",
-    bg: "bg-red-50",
-    border: "border-red-200",
+    color: "text-red-700",
+    bg: "bg-red-100",
+    border: "border-red-300",
     icon: "⚠️",
     label: "High Impact",
     barColor: "bg-red-500",
@@ -32,7 +32,7 @@ export default function CarbonScoreCard({ score, level, breakdown }) {
   const config = levelConfig[level] || levelConfig.Moderate;
 
   return (
-    <div className={`card ${config.bg} ${config.border} border-2`}>
+    <div className={`card ${config.bg} ${config.border} border-2`} role="region" aria-label={`Carbon score: ${level} impact`}>
       <div className="flex items-start justify-between mb-4">
         <div>
           <p className="text-sm font-medium text-gray-500 mb-1">Carbon Score</p>

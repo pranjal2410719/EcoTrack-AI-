@@ -30,12 +30,17 @@ export default function RecommendationCard({ analysis }) {
           <p className="text-xs text-gray-400">Powered by Gemini</p>
         </div>
       </div>
-      <div className={`prose prose-sm max-w-none text-gray-600 leading-relaxed ${!expanded ? "line-clamp-6" : ""}`}>
+      <div
+        className={`prose prose-sm max-w-none text-gray-600 leading-relaxed ${!expanded ? "line-clamp-6" : ""}`}
+        id="ai-recommendations-content"
+      >
         <div className="whitespace-pre-wrap">{content}</div>
       </div>
       <button
         onClick={() => setExpanded(!expanded)}
         className="mt-3 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
+        aria-expanded={expanded}
+        aria-controls="ai-recommendations-content"
       >
         {expanded ? "Show less" : "Read more"}
       </button>
