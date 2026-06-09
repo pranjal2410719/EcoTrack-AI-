@@ -2,167 +2,230 @@
 
 > **Track, Understand, and Reduce Your Environmental Impact with AI-Powered Insights.**
 
-EcoTrack AI helps individuals calculate their carbon footprint through a simple lifestyle assessment, generates personalized sustainability recommendations using Google's Gemini AI, and visualizes progress through an interactive dashboard.
+[![Tests](https://img.shields.io/badge/tests-22%20passing-brightgreen)](#-testing)
+[![Code Style](https://img.shields.io/badge/code%20style-prettier-ff69b4)](#)
+[![ESLint](https://img.shields.io/badge/lint-eslint-4b32c3)](#)
+[![AI](https://img.shields.io/badge/AI-Gemini%202.0-4285F4)](#)
+
+EcoTrack AI is a full-stack sustainability platform that helps you **understand**, **track**, and **reduce** your carbon footprint. Built with React, Node.js, and Google Gemini AI.
+
+---
 
 ## ✨ Features
 
+### ✅ Understand
 - **One-Click Assessment** — Answer 5 quick questions about your lifestyle
-- **Carbon Score Calculation** — Instant environmental impact score with category breakdown
-- **AI-Powered Recommendations** — Personalized analysis and action plan from Gemini AI
-- **Interactive Dashboard** — Score visualization, pie charts, and progress tracking
-- **Supabase Authentication** — Secure sign-in with email
+- **Instant Carbon Score** — Real-time calculation with category breakdown (transport, energy, diet, flights, shopping)
+- **Emission Charts** — Interactive pie chart visualization of your carbon footprint
 
-## 🏗️ Tech Stack
+### ✅ Track
+- **Interactive Dashboard** — Score history, progress tracking, and trend analysis
+- **Score History** — Timeline of all your assessments with month-over-month comparison
+- **Progress Metrics** — Track reduction percentage and carbon level changes
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 18 + Vite + Tailwind CSS |
-| **Backend** | Node.js + Express.js |
-| **Database** | Supabase (PostgreSQL) |
-| **Auth** | Supabase Auth |
-| **AI** | Google Gemini API |
-| **Charts** | Recharts |
+### ✅ Reduce
+- **AI Recommendations** — Personalized analysis and action plan from Gemini AI
+- **AI Climate Coach** — Chat with an AI sustainability coach on `/coach` for personalized advice
+- **Carbon Reduction Simulator** — Compare current vs target lifestyle at `/simulator` and see potential CO₂ savings
+- **Sustainability Goals** — Set and track reduction goals with progress bar on dashboard
 
-## 📁 Project Structure
+---
+
+## 🏗️ Architecture
 
 ```
-e2e-track/
-├── context/              # Project documentation (source of truth)
-│   ├── project-overview.md
-│   ├── product-requirements.md
-│   ├── architecture.md
-│   ├── api-documentation.md
-│   ├── database-schema.md
-│   ├── user-flows.md
-│   ├── feature-list.md
-│   ├── roadmap.md
-│   ├── ai-prompts.md
-│   ├── decisions.md
-│   ├── future-plans.md
-│   └── development-log.md
-│
-├── frontend/             # React application
-│   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Route pages
-│   │   ├── layouts/      # Layout wrappers
-│   │   ├── services/     # API layer
-│   │   └── App.jsx       # Root component
-│   └── ...
-│
-├── backend/              # Express API server
-│   ├── src/
-│   │   ├── routes/       # API endpoints
-│   │   ├── services/     # Business logic
-│   │   ├── config/       # Configuration
-│   │   ├── middleware/    # Auth & error handling
-│   │   └── server.js     # Entry point
-│   └── ...
-│
-└── README.md
+┌─────────────────────────────────────────────────────┐
+│                   React SPA (Vite)                   │
+│  ┌─────────┐ ┌──────────┐ ┌──────────────────────┐  │
+│  │  Pages  │ │Components│ │   Services (axios)   │  │
+│  │ - Home  │ │ - Cards  │ │ - API Layer          │  │
+│  │ - Auth  │ │ - Charts │ │ - Supabase Auth      │  │
+│  │ - Assess│ │ - Layout │ │                      │  │
+│  │ - Dash  │ │ - Skele  │ │                      │  │
+│  │ - Coach │ │ - Goals  │ │                      │  │
+│  │ - Sim   │ │          │ │                      │  │
+│  └─────────┘ └──────────┘ └──────────────────────┘  │
+│         │ Lazy loading + React.memo                  │
+└──────────┼───────────────────────────────────────────┘
+           │ HTTP (axios)
+┌──────────┼───────────────────────────────────────────┐
+│            Express.js API (Controller-Service)        │
+│  Routes → Controllers → Services → Database/AI       │
+│  Middleware: Auth (JWT), Validation, Error Handler    │
+└──────────┬───────────────────────────────────────────┘
+           │
+    ┌──────┴──────┐
+    │             │
+┌───▼────┐  ┌────▼───┐
+│Supabase│  │ Gemini │
+│Postgres│  │ 2.0    │
+│+ Auth  │  │ Flash  │
+└────────┘  └────────┘
 ```
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 18+
-- npm or yarn
+- npm
 
-### 1. Clone & Install
-
+### 1. Install Dependencies
 ```bash
-# Install backend dependencies
-cd backend
-npm install
-
-# Install frontend dependencies
-cd ../frontend
-npm install
+cd backend && npm install
+cd ../frontend && npm install
 ```
 
 ### 2. Set Up Environment Variables
 
 **Backend** (`backend/.env`):
 ```env
-PORT=5000
+PORT=5001
 SUPABASE_URL=your_supabase_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 GEMINI_API_KEY=your_gemini_api_key
-CLERK_SECRET_KEY=your_clerk_secret_key
 FRONTEND_URL=http://localhost:5173
 ```
 
 **Frontend** (`frontend/.env`):
 ```env
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 VITE_API_URL=
 ```
 
-### 3. Set Up Supabase Database
+### 3. Set Up Database
+Run the SQL in `backend/supabase-migration.sql` in your Supabase SQL editor.
 
-Run the SQL migration script located in [supabase-migration.sql](file:///home/dev/Desktop/projects/e2e-track/backend/supabase-migration.sql) in your Supabase SQL editor to create the necessary tables and Row-Level Security (RLS) policies.
-
-### 4. Set Up Environment Variables
-
-Configure the environment files (`.env`) in both directories:
-- In `frontend/`, copy `.env.example` to `.env` and configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
-- In `backend/`, copy `.env.example` to `.env` and configure `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `GEMINI_API_KEY`.
-
-### 5. Set Up Gemini
-
-1. Get an API key from [Google AI Studio](https://aistudio.google.com/)
-2. Add it to `backend/.env` as `GEMINI_API_KEY`
-
-### 6. Run the App
-
+### 4. Run the App
 ```bash
-# Terminal 1: Backend
-cd backend
-npm run dev
+# Terminal 1 — Backend API
+cd backend && npm run dev
 
-# Terminal 2: Frontend
-cd frontend
-npm run dev
+# Terminal 2 — Frontend
+cd frontend && npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open **[http://localhost:5173](http://localhost:5173)**
+
+---
 
 ## 📡 API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Health check |
-| POST | `/api/assessment` | Save assessment & calculate score |
-| POST | `/api/calculate` | Calculate score only |
-| POST | `/api/analyze` | Generate AI recommendations |
-| GET | `/api/dashboard/:userId` | Get full dashboard data |
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET | `/api/health` | ❌ | Health check |
+| POST | `/api/calculate` | ❌ | Calculate carbon score |
+| POST | `/api/simulate` | ❌ | Compare current vs target lifestyle |
+| POST | `/api/assessment` | ✅ | Save assessment & calculate score |
+| POST | `/api/analyze` | ✅ | Generate AI recommendations |
+| GET | `/api/dashboard` | ✅ | Full dashboard data |
+| POST | `/api/coach/chat` | ✅ | Chat with AI climate coach |
 
-See `context/api-documentation.md` for detailed API documentation.
+See **[docs/API_REFERENCE.md](docs/API_REFERENCE.md)** for full documentation.
 
-## 🧮 Carbon Calculation Formula
+---
 
-| Category | Calculation |
-|----------|-------------|
-| Transport | `km_per_week × 0.21` |
-| Electricity | `bill_amount × 0.0008` |
-| Flights | `flights_per_year × 90` |
-| Shopping | `purchases_per_month × 5` |
-| Diet | Non-Veg: 100 / Vegetarian: 50 / Vegan: 20 |
+## 🧮 Carbon Calculation
+
+| Category | Factor | Example |
+|----------|--------|---------|
+| 🚗 Transport | 0.21 kg CO₂ per km/week | 150 km → 31.5 kg |
+| ⚡ Electricity | 0.0008 per ₹/month | ₹2500 → 2 kg |
+| ✈️ Flights | 90 kg per flight/year | 3 flights → 270 kg |
+| 🛍️ Shopping | 5 kg per order/month | 5 orders → 25 kg |
+| 🍽️ Diet | Veg: 50 / Vegan: 20 / Meat: 100 | — |
 
 ### Carbon Levels
-- **Low**: < 200 kg
-- **Moderate**: 200–500 kg
-- **High**: > 500 kg
+- **🟢 Low:** < 200 kg
+- **🟡 Moderate:** 200–500 kg
+- **🔴 High:** > 500 kg
+
+---
+
+## 🧪 Testing
+
+```bash
+cd backend
+npm test          # Run 22 tests
+npm run test:watch # Watch mode
+npm run lint      # ESLint check
+npm run format    # Prettier format
+```
+
+**Coverage:** Unit tests for calculator (all diet types, edge cases), API integration tests (validation, auth, 404, health check).
+
+---
+
+## 📚 Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture and design decisions |
+| [docs/API_REFERENCE.md](docs/API_REFERENCE.md) | Complete API reference with examples |
+| [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md) | Database tables and schemas |
+| [context/](context/) | Project management and strategy docs |
+
+---
+
+## 🎯 Project Structure
+
+```
+e2e-track/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/   # Business logic layer
+│   │   ├── services/      # Calculator, AI, DB services
+│   │   ├── routes/        # API endpoint definitions
+│   │   ├── middleware/     # Auth, validation, error handling
+│   │   └── validations/   # Input validation rules
+│   ├── tests/             # Jest + Supertest
+│   └── docs/              # Project documentation
+├── frontend/
+│   └── src/
+│       ├── pages/         # Route pages (lazy-loaded)
+│       ├── components/    # Reusable UI (memoized)
+│       ├── services/      # API client (axios)
+│       └── layouts/       # Layout wrappers
+└── context/               # Management docs
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18 + Vite + Tailwind CSS |
+| **Charts** | Recharts |
+| **Backend** | Node.js + Express.js |
+| **Database** | Supabase (PostgreSQL) |
+| **Auth** | Supabase Auth + JWT |
+| **AI** | Google Gemini 2.0 Flash |
+| **Testing** | Jest + Supertest |
+| **Linting** | ESLint + Prettier |
+
+---
+
+## 📈 Performance
+
+- **Lazy loading** — All routes code-split via `React.lazy` + `Suspense`
+- **Memoization** — Charts and cards wrapped in `React.memo`
+- **Parallel queries** — Dashboard fetches data via `Promise.all`
+- **AI caching** — Gemini responses stored in DB, not regenerated on every load
+- **Efficient API** — Controller-Service architecture with proper separation of concerns
+
+---
 
 ## 🔮 Future Roadmap
 
 - Gamification (points, badges, leaderboards)
-- Community challenges
+- Weekly email sustainability reports
 - Carbon receipt scanner (OCR)
 - Green route planner
-- Mobile app (Flutter)
+- Mobile app
 - B2B corporate platform
+
+---
 
 ## 📄 License
 
@@ -170,4 +233,7 @@ MIT
 
 ---
 
-<p align="center">Built with 🌱 for a greener planet</p>
+<p align="center">
+  Built with 🌱 for a greener planet<br>
+  <a href="https://github.com/pranjal2410719/EcoTrack-AI-">GitHub</a>
+</p>
