@@ -47,4 +47,10 @@ export async function simulateReduction(current, target) {
   return response.data;
 }
 
+// Report endpoint
+export async function getReportData() {
+  const response = await api.get("/report");
+  return response.data;
+}
+
 export default api;

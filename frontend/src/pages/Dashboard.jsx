@@ -8,6 +8,7 @@ import RecommendationCard from "../components/RecommendationCard";
 import DashboardSkeleton from "../components/DashboardSkeleton";
 import GoalsSection from "../components/GoalsSection";
 import { showError } from "../utils/toast";
+import PdfReport from "../components/PdfReport";
 
 export default function Dashboard() {
   const { user, loading: authLoading } = useAuth();
@@ -96,9 +97,12 @@ export default function Dashboard() {
           <h1 className="text-3xl font-bold text-gray-900">Your Dashboard</h1>
           <p className="text-gray-500 mt-1">Track your carbon footprint and sustainability progress.</p>
         </div>
-        <Link to="/assessment" className="btn-primary !py-2.5 !px-5 text-sm whitespace-nowrap">
-          + New Assessment
-        </Link>
+        <div className="flex gap-3">
+          <PdfReport />
+          <Link to="/assessment" className="btn-primary !py-2.5 !px-5 text-sm whitespace-nowrap">
+            + New Assessment
+          </Link>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6 mb-6">

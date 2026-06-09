@@ -68,8 +68,64 @@ Keep the entire response under 300 words. Use simple, encouraging language. Form
     return text;
   } catch (error) {
     console.error("Gemini API error:", error.message);
-    throw new Error("Failed to generate AI recommendations");
+    // Graceful fallback — return data-driven recommendations
+    return getFallbackRecommendations(assessmentData);
   }
+}
+
+/**
+ * Provide meaningful fallback recommendations when Gemini API is unavailable.
+ * Uses the user's actual carbon data to generate personalized advice.
+ */
+function getFallbackRecommendations(data) {
+  const { transport, electricity, diet, flights, shopping, carbonScore, level } = data;
+  const tips = [];
+
+  // Transport tips
+  if (transport > 100) {
+    tips.push(`🚗 **Reduce driving** — You drive ${transport} km/week. Try carpooling twice a week or using public transport 3 days a week to save ~${Math.round(transport * 0.21 * 12 * 0.3)} kg CO₂/year.`);
+  } else if (transport > 0) {
+    tips.push(`🚗 **Optimize transport** — You drive ${transport} km/week. Combining errands into fewer trips can reduce emissions by up to 20%.`);
+  }
+
+  // Electricity tips
+  if (electricity > 2000) {
+    tips.push(`⚡ **Cut electricity costs** — Your bill is ₹${electricity}/month. Switching to LED bulbs and 5-star appliances can save ~${Math.round(electricity * 0.0008 * 12 * 0.3)} kg CO₂/year.`);
+  } else if (electricity > 500) {
+    tips.push(`⚡ **Save energy** — Unplug devices when not in use and use natural light during the day to reduce your ₹${electricity}/month bill further.`);
+  }
+
+  // Diet tips
+  if (diet === "non-veg") {
+    tips.push(`🥦 **Go plant-based** — Try 3 meatless days per week. Going vegetarian would save ~600 kg CO₂/year compared to a meat-heavy diet.`);
+  } else if (diet === "vegetarian") {
+    tips.push(`🥦 **Eat green** — You're already vegetarian! Going fully vegan would save an additional ~360 kg CO₂/year.`);
+  } else if (diet === "vegan") {
+    tips.push(`🌱 **Great diet choice!** — Your vegan diet saves ~960 kg CO₂/year compared to a meat-heavy diet.`);
+  }
+
+  // Flights tips
+  if (flights > 2) {
+    tips.push(`✈️ **Fly smarter** — You take ${flights} flights/year. Each short-haul flight emits ~90 kg CO₂. Consider trains for distances under 500 km.`);
+  } else if (flights > 0) {
+    tips.push(`✈️ **Low flyer** — You take ${flights} flight(s)/year. Choose economy class and direct flights to minimize per-trip emissions.`);
+  }
+
+  // Shopping tips
+  if (shopping > 5) {
+    tips.push(`🛍️ **Conscious shopping** — You order ${shopping}x/month. Consolidating shipments and choosing slower delivery cuts packaging waste by 40%.`);
+  }
+
+  // Add a general tip if we have very few
+  if (tips.length < 2) {
+    tips.push(`📊 **Track your progress** — Regular monthly check-ins help you stay motivated. Your current score is ${carbonScore} kg CO₂ (${level} impact).`);
+    tips.push(`💚 **Small changes add up** — Every sustainable choice matters. Set specific goals on your dashboard and track your progress!`);
+  }
+
+  const header = `## 🌿 Your Personalized Sustainability Plan\n\n**Your Score:** ${carbonScore} kg CO₂ (${level} Impact)\n\n`;
+  const weeklyPlan = `\n\n### 📅 7-Day Quick Start\n1. **Day 1:** Track everything you use for one day\n2. **Day 2:** Replace one car trip with walking/cycling\n3. **Day 3:** Try one plant-based meal\n4. **Day 4:** Unplug electronics when not in use\n5. **Day 5:** Say no to single-use plastic\n6. **Day 6:** Buy local produce\n7. **Day 7:** Review your week — celebrate progress!`;
+
+  return header + tips.join("\n\n") + weeklyPlan;
 }
 
 module.exports = { generateRecommendations };

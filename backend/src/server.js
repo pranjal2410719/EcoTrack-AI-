@@ -8,6 +8,7 @@ const aiRoutes = require("./routes/ai");
 const dashboardRoutes = require("./routes/dashboard");
 const coachRoutes = require("./routes/coach");
 const simulatorRoutes = require("./routes/simulator");
+const reportRoutes = require("./routes/report");
 const errorHandler = require("./middleware/errorHandler");
 const { apiLimiter } = require("./middleware/rateLimit");
 
@@ -49,6 +50,7 @@ app.use("/api/analyze", aiRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/coach", coachRoutes);
 app.use("/api/simulate", simulatorRoutes);
+app.use("/api/report", reportRoutes);
 
 // 404 handler — must be after all route definitions
 app.use("/api", (req, res) => {

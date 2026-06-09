@@ -77,8 +77,62 @@ async function generateCoachResponse({ message, history = [], userContext = null
     return text;
   } catch (error) {
     console.error("Gemini Coach API error:", error.message);
-    throw new Error("Failed to generate coaching response");
+    // Graceful fallback — return helpful cached-style content
+    return getFallbackCoachResponse({ message, userContext });
   }
+}
+
+/**
+ * Provide a meaningful fallback response when Gemini API is unavailable.
+ * Uses the user's carbon data to give personalized, actionable advice.
+ */
+function getFallbackCoachResponse({ message, userContext }) {
+  const lowImpactTips = [
+    "🌱 **Great job!** Your carbon footprint is already low. To maintain this:",
+    "• Keep using public transport or carpooling",
+    "• Continue your plant-rich diet choices",
+    "• Inspire friends and family to track their footprint too!",
+    "• Consider offsetting your remaining emissions through tree-planting initiatives",
+  ];
+
+  const moderateImpactTips = [
+    "🌿 **You're on the right track!** Here are ways to reduce further:",
+    "• Try meatless meals 3 days a week",
+    "• Switch to LED bulbs and 5-star rated appliances",
+    "• Combine errands into fewer car trips",
+    "• Use a programmable thermostat to reduce AC usage",
+    "• Choose train over plane for short-distance travel",
+  ];
+
+  const highImpactTips = [
+    "🔥 **Ready for a change?** Here's where you can make the biggest impact:",
+    "• Start with your commute — try public transport or carpooling twice a week",
+    "• Reduce AC usage by 2°C — saves ~100 kg CO₂/year",
+    "• Switch to a plant-based meal plan gradually",
+    "• Avoid single-use plastics and packaging",
+    "• Consider renewable energy options for your home",
+  ];
+
+  const generalTips = [
+    "💚 **AI Coach is temporarily unavailable.** In the meantime:",
+    "• Track your monthly emissions to spot trends",
+    "• Set sustainability goals on your dashboard",
+    "• Use the Carbon Simulator to compare lifestyle changes",
+    "• Every small step counts — consistency matters more than perfection!",
+  ];
+
+  let tips;
+  if (!userContext) {
+    tips = generalTips;
+  } else if ((userContext.carbonScore || 0) < 200) {
+    tips = lowImpactTips;
+  } else if ((userContext.carbonScore || 0) < 500) {
+    tips = moderateImpactTips;
+  } else {
+    tips = highImpactTips;
+  }
+
+  return tips.join("\n");
 }
 
 module.exports = { generateCoachResponse };
