@@ -85,6 +85,10 @@ Climate change is the defining challenge of our generation, yet most people have
 
 ## 🏗️ Architecture
 
+<p align="center">
+  <img src="README-assets/architecture.svg" alt="EcoTrack AI Architecture" width="100%" />
+</p>
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    Frontend (React + Vite)                │
