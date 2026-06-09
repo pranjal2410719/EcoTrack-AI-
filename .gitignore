@@ -29,4 +29,4 @@ lerna-debug.log*
 Thumbs.db
 
 # User requested exclusions (do not push context files)
-context/
+/context/
