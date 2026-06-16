@@ -4,11 +4,11 @@
 
 | Field | Value |
 |-------|-------|
-| **Attempt** | 2 (latest submitted) |
-| **AI Score** | 91.22 / 100 |
-| **Rank** | #60 / 29,932 |
-| **Remaining Attempts** | 1 |
-| **Time Left** | ~12 days |
+| **Attempt** | 3 (latest submitted) |
+| **AI Score** | **95.99 / 100** |
+| **Rank** | **#21 / 30,040** |
+| **Remaining Attempts** | 0 (final attempt) |
+| **Time Left** | Submitted |
 
 ---
 
@@ -26,7 +26,7 @@
 
 ---
 
-## Attempt 3 — What Changed (Post-Attempt 2)
+## Attempt 3 — What Changed (Post-Attempt 2 → Actual Results)
 
 ### New Features Built
 | Feature | Files | Impact |
@@ -89,35 +89,48 @@
 
 ---
 
-## Attempt 3 — Estimated Score
+## Attempt 3 — Actual Results
 
-| Category | Attempt 2 | Attempt 3 Estimate | Reasoning |
-|----------|-----------|-------------------|-----------|
-| **Code Quality** | 86 | **93-95** | +Controller-Service architecture, +JSDoc (52+ blocks), +ESLint/Prettier, +DRY validators, +modular services, +error handler middleware |
-| **Security** | 98 | **98-99** | +Rate limiting (express-rate-limit), +CORS hardened, +function-based origin. Already near-perfect. |
-| **Efficiency** | 80 | **92-95** | +React.lazy (all 7 routes), +React.memo (3 components), +Promise.all parallel queries, +code splitting, +PageSkeleton. Biggest improvement. |
-| **Testing** | 94 | **96-98** | 63 tests (was 22), +mocked AI flows, +simulator unit tests, +coach auth + flow tests, +frontend component tests |
-| **Accessibility** | 96 | **97-98** | +23 aria-labels, +radiogroup, +progressbar, +sr-only labels, +semantic HTML maintained |
-| **Problem Alignment** | 93 | **96-98** | +AI Coach (solves "smart assistant"), +Simulator (solves "reduce"), +Goals (solves "track"), +PDF Report (innovation), +live demo proven |
+| Category | Attempt 2 | Attempt 3 Actual | Change |
+|----------|-----------|------------------|--------|
+| **Code Quality** | 86 | **95** | +9 pts |
+| **Security** | 98 | **98** | 0 (maintained) |
+| **Efficiency** | 80 | **94** | +14 pts |
+| **Testing** | 94 | **97** | +3 pts |
+| **Accessibility** | 96 | **97** | +1 pt |
+| **Problem Alignment** | 93 | **96** | +3 pts |
+| **Weighted Total** | **91.22** | **95.99** | **+4.77 pts** |
 
-### Estimated Weighted Total
+### Final Score Calculation
 
 ```
-Code Quality:  94 × 0.20 = 18.8
+Code Quality:  95 × 0.20 = 19.0
 Security:      98 × 0.15 = 14.7
-Efficiency:    93 × 0.20 = 18.6
+Efficiency:    94 × 0.20 = 18.8
 Testing:       97 × 0.15 = 14.55
 Accessibility: 97 × 0.15 = 14.55
-Alignment:     97 × 0.15 = 14.55
+Alignment:     96 × 0.15 = 14.40
 ───────────────────────────────
-TOTAL:                   95.75
+TOTAL:                   96.00
 ```
 
-| Metric | Estimate |
-|--------|----------|
-| **Estimated Score** | **95-97 / 100** |
-| **Improvement** | **+4 to +6 points** |
-| **Expected Rank** | **Top 20-30** |
+### Rank Progression
+| Attempt | Score | Rank |
+|---------|-------|------|
+| Attempt 1 | 84.00 | — |
+| Attempt 2 | 91.22 | #60 / 29,932 |
+| Attempt 3 | **95.99** | **#21 / 30,040** |
+
+---
+
+### What Prevents Top 10
+
+| Barrier | Solution | Effort |
+|---------|----------|--------|
+| Gemini quota (affects AI features) | Upgrade to paid tier or wait for reset | Low |
+| No frontend page tests | Add Vitest tests for 7 pages | Medium |
+| Bundle size warning | Split Recharts into manual chunk | Low |
+| Demo video | Create video walkthrough | Medium |
 
 ---
 

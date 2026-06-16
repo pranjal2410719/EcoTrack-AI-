@@ -12,11 +12,11 @@
 **Decision:** Use Express.js for a lightweight, focused backend.
 **Consequences:** Separate frontend and backend deployments.
 
-## ADR-3: Clerk for Authentication
-**Status:** Accepted
-**Context:** Need quick, secure auth without building from scratch.
-**Decision:** Use Clerk for its React SDK, easy setup, and social login.
-**Consequences:** No self-hosted auth; Clerk handles user management.
+## ADR-3: Supabase Auth over Clerk
+**Status:** Accepted (changed mid-development)
+**Context:** Need quick, secure auth without building from scratch. Initially considered Clerk, but Supabase Auth provides tighter integration with the existing Supabase database and RLS policies.
+**Decision:** Use Supabase Auth (email/password) for authentication, integrated with the existing Supabase database.
+**Consequences:** Unified auth + database provider; JWT tokens verified on every request; RLS policies ensure data isolation per user.
 
 ## ADR-4: Supabase over Direct PostgreSQL
 **Status:** Accepted

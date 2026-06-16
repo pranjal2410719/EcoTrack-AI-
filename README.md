@@ -18,45 +18,60 @@ Climate change is the defining challenge of our generation, yet most people have
 
 ### The Challenge
 
-> *"Carbon Footprint Awareness Platform"* — Help users **understand**, **track**, and **reduce** their carbon emissions.
+> _"Carbon Footprint Awareness Platform"_ — Help users **understand**, **track**, and **reduce** their carbon emissions.
 
 ### How EcoTrack AI Addresses Each Pillar
 
-| Pillar | EcoTrack AI Feature |
-|--------|-------------------|
-| **Understand** | One-click assessment with real-time carbon scoring and category breakdown |
-| **Track** | Interactive dashboard with score history, progress metrics, and trend analysis |
-| **Reduce** | AI recommendations, Carbon Reduction Simulator, Sustainability Goals, and AI Climate Coach |
+| Pillar         | EcoTrack AI Feature                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| **Understand** | One-click assessment with real-time carbon scoring and category breakdown                  |
+| **Track**      | Interactive dashboard with score history, progress metrics, and trend analysis             |
+| **Reduce**     | AI recommendations, Carbon Reduction Simulator, Sustainability Goals, and AI Climate Coach |
 
 ---
 
 ## 🚀 Live Demo
 
-| Page | URL | Description |
-|------|-----|-------------|
-| 🏠 Home | [ecotrack0a.netlify.app](https://ecotrack0a.netlify.app) | Landing page with feature overview |
-| 📝 Assessment | [/assessment](https://ecotrack0a.netlify.app/assessment) | 5-question carbon footprint calculator |
-| 📊 Dashboard | [/dashboard](https://ecotrack0a.netlify.app/dashboard) | Score history, charts, recommendations, goals |
-| 🤖 AI Coach | [/coach](https://ecotrack0a.netlify.app/coach) | Chat with Gemini AI sustainability coach |
-| 🔬 Simulator | [/simulator](https://ecotrack0a.netlify.app/simulator) | Compare current vs target lifestyle |
+| Page          | URL                                                      | Description                                   |
+| ------------- | -------------------------------------------------------- | --------------------------------------------- |
+| 🏠 Home       | [ecotrack0a.netlify.app](https://ecotrack0a.netlify.app) | Landing page with feature overview            |
+| 📝 Assessment | [/assessment](https://ecotrack0a.netlify.app/assessment) | 5-question carbon footprint calculator        |
+| 📊 Dashboard  | [/dashboard](https://ecotrack0a.netlify.app/dashboard)   | Score history, charts, recommendations, goals |
+| 🤖 AI Coach   | [/coach](https://ecotrack0a.netlify.app/coach)           | Chat with Gemini AI sustainability coach      |
+| 🔬 Simulator  | [/simulator](https://ecotrack0a.netlify.app/simulator)   | Compare current vs target lifestyle           |
+
+---
+
+## 📸 Screenshots
+
+| Page                                                           | Preview                                                                              |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| 🏠 **Home** — Landing page with hero, features grid, and CTA   | <img src="README-assets/screenshot-home.png" alt="Home Page" width="100%" />         |
+| 🔐 **Sign In** — Secure authentication with Supabase Auth      | <img src="README-assets/screenshot-signin.png" alt="Sign In Page" width="100%" />    |
+| 📝 **Assessment (protected)** — 5-step carbon footprint wizard | <img src="README-assets/screenshot-assess.png" alt="Assessment page" width="100%" /> |
+
+> 📊 **Dashboard**, **AI Coach**, **Simulator**, and **PDF Report** require authentication. [Try the live demo](https://ecotrack0a.netlify.app) to see them in action.
 
 ---
 
 ## ✨ Features
 
 ### 🧮 Carbon Assessment
+
 - **5-Step Wizard** — Transport, Electricity, Diet, Flights, Shopping
 - **Live Scoring** — Real-time carbon score updates as you answer
 - **XP Gamification** — Earn experience points for completing steps
 - **Smart Validation** — Input validation with helpful tips per category
 
 ### 📊 Dashboard
+
 - **Carbon Score Card** — Visual score with level classification (Low / Moderate / High)
 - **Emission Breakdown** — Interactive pie chart showing category contributions
 - **Progress Tracking** — Month-over-month comparison with reduction percentage
 - **Score History** — Timeline of all assessments with trend analysis
 
 ### 🤖 AI Climate Coach
+
 - **Real-time Chat** — Conversational AI powered by Google Gemini 2.0 Flash
 - **Personalized Context** — AI receives your carbon data for tailored advice
 - **Conversation History** — Maintains chat context across messages
@@ -65,18 +80,21 @@ Climate change is the defining challenge of our generation, yet most people have
 - **Graceful Fallback** — Cached tips when Gemini API is unavailable
 
 ### 🔬 Carbon Reduction Simulator
+
 - **Before/After Comparison** — Side-by-side lifestyle comparison
 - **Category-Level Savings** — See exactly where you can save CO₂
 - **Annual Projections** — Monthly and annual reduction estimates
 - **Level Change Detection** — Alerts when you cross carbon level thresholds
 
 ### 🎯 Sustainability Goals
+
 - **Goal Templates** — Pre-built goals for transport, energy, diet, flights, shopping
 - **Custom Goals** — Create your own sustainability targets
 - **Progress Bar** — Visual progress tracking across all goals
 - **Completion Tracking** — Mark goals as done and track achievement rate
 
 ### 📄 PDF Sustainability Report
+
 - **Downloadable Report** — Professional PDF with carbon score, breakdown, history, and recommendations
 - **Client-Side Generation** — Uses jsPDF for fast, secure report creation
 - **Styled Layout** — Color-coded bars, tables, and formatted recommendations
@@ -86,7 +104,7 @@ Climate change is the defining challenge of our generation, yet most people have
 ## 🏗️ Architecture
 
 <p align="center">
-  <img src="README-assets/architecture.svg" alt="EcoTrack AI Architecture" width="100%" />
+  <img src="README-assets/architecture.png" alt="EcoTrack AI Architecture" width="100%" />
 </p>
 
 ```
@@ -135,34 +153,34 @@ Climate change is the defining challenge of our generation, yet most people have
 
 ### Design Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Frontend Framework | React 18 + Vite | Fast HMR, lazy loading, modern tooling |
-| Styling | Tailwind CSS | Rapid UI development, consistent design |
-| State Management | React Context + useState | Lightweight, no extra dependencies |
-| Backend Architecture | Controller-Service | Clean separation of concerns |
-| Database | Supabase (PostgreSQL) | Managed, RLS, built-in auth |
-| AI Provider | Google Gemini 2.0 Flash | Fast, free tier, good for sustainability |
-| Auth | Supabase Auth + JWT | Integrated with database RLS |
-| Testing | Jest + Supertest (backend) | Industry standard for Node.js APIs |
+| Decision             | Choice                     | Rationale                                |
+| -------------------- | -------------------------- | ---------------------------------------- |
+| Frontend Framework   | React 18 + Vite            | Fast HMR, lazy loading, modern tooling   |
+| Styling              | Tailwind CSS               | Rapid UI development, consistent design  |
+| State Management     | React Context + useState   | Lightweight, no extra dependencies       |
+| Backend Architecture | Controller-Service         | Clean separation of concerns             |
+| Database             | Supabase (PostgreSQL)      | Managed, RLS, built-in auth              |
+| AI Provider          | Google Gemini 2.0 Flash    | Fast, free tier, good for sustainability |
+| Auth                 | Supabase Auth + JWT        | Integrated with database RLS             |
+| Testing              | Jest + Supertest (backend) | Industry standard for Node.js APIs       |
 
 ---
 
 ## 🔧 Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Frontend** | React 18 + Vite | SPA with code splitting |
-| **Styling** | Tailwind CSS | Utility-first CSS |
-| **Charts** | Recharts | Interactive pie charts |
-| **PDF** | jsPDF | Client-side report generation |
-| **Markdown** | React Markdown + remark-gfm | AI response rendering |
-| **Backend** | Node.js + Express.js | REST API |
-| **Database** | Supabase (PostgreSQL) | Managed database + auth |
-| **AI** | Google Gemini 2.0 Flash | Recommendations + coaching |
-| **Testing** | Jest + Supertest | Backend unit + integration tests |
-| **Linting** | ESLint + Prettier | Code quality |
-| **Deployment** | Netlify + Render | Frontend + backend hosting |
+| Layer          | Technology                  | Purpose                          |
+| -------------- | --------------------------- | -------------------------------- |
+| **Frontend**   | React 18 + Vite             | SPA with code splitting          |
+| **Styling**    | Tailwind CSS                | Utility-first CSS                |
+| **Charts**     | Recharts                    | Interactive pie charts           |
+| **PDF**        | jsPDF                       | Client-side report generation    |
+| **Markdown**   | React Markdown + remark-gfm | AI response rendering            |
+| **Backend**    | Node.js + Express.js        | REST API                         |
+| **Database**   | Supabase (PostgreSQL)       | Managed database + auth          |
+| **AI**         | Google Gemini 2.0 Flash     | Recommendations + coaching       |
+| **Testing**    | Jest + Supertest            | Backend unit + integration tests |
+| **Linting**    | ESLint + Prettier           | Code quality                     |
+| **Deployment** | Netlify + Render            | Frontend + backend hosting       |
 
 ---
 
@@ -171,6 +189,7 @@ Climate change is the defining challenge of our generation, yet most people have
 EcoTrack AI uses Google Gemini 2.0 Flash in two key features:
 
 ### 1. Assessment Analysis
+
 ```
 User completes assessment
   → Backend calculates carbon score
@@ -180,6 +199,7 @@ User completes assessment
 ```
 
 ### 2. AI Climate Coach
+
 ```
 User sends message in chat
   → Backend fetches latest assessment data
@@ -189,6 +209,7 @@ User sends message in chat
 ```
 
 ### Graceful Fallback
+
 When Gemini API is unavailable (quota limits, network issues), both features provide **data-driven cached recommendations** based on the user's actual carbon data — not generic advice.
 
 ---
@@ -201,14 +222,14 @@ When Gemini API is unavailable (quota limits, network issues), both features pro
 cd backend && npm test
 ```
 
-| Test File | Tests | Coverage |
-|-----------|-------|----------|
-| `calculator.test.js` | 10 | All diet types, edge cases, level classification |
-| `api.test.js` | 15 | Validation, auth gates, 404, health check |
-| `simulator.test.js` | 12 | Unit tests (savings calculation) + API integration |
-| `coach.test.js` | 12 | Auth gates + mocked full flow (Supabase + Gemini) |
-| `dashboard.test.js` | 3 | Auth gate edge cases |
-| **Total** | **52** | **100% pass rate** |
+| Test File            | Tests  | Coverage                                           |
+| -------------------- | ------ | -------------------------------------------------- |
+| `calculator.test.js` | 10     | All diet types, edge cases, level classification   |
+| `api.test.js`        | 15     | Validation, auth gates, 404, health check          |
+| `simulator.test.js`  | 12     | Unit tests (savings calculation) + API integration |
+| `coach.test.js`      | 12     | Auth gates + mocked full flow (Supabase + Gemini)  |
+| `dashboard.test.js`  | 3      | Auth gate edge cases                               |
+| **Total**            | **52** | **100% pass rate**                                 |
 
 ### Frontend Tests
 
@@ -216,13 +237,14 @@ cd backend && npm test
 cd frontend && npm test
 ```
 
-| Test File | Tests | Coverage |
-|-----------|-------|----------|
-| `CarbonScoreCard.test.jsx` | 3 | Renders score, level, breakdown |
-| `GoalsSection.test.jsx` | 4 | Renders, adds goals, toggles completion |
-| `LoadingSpinner.test.jsx` | 4 | Renders, accepts size/color props |
+| Test File                  | Tests | Coverage                                |
+| -------------------------- | ----- | --------------------------------------- |
+| `CarbonScoreCard.test.jsx` | 3     | Renders score, level, breakdown         |
+| `GoalsSection.test.jsx`    | 4     | Renders, adds goals, toggles completion |
+| `LoadingSpinner.test.jsx`  | 4     | Renders, accepts size/color props       |
 
 ### What We Test
+
 - ✅ Carbon calculator (all inputs, edge cases, diet types)
 - ✅ API validation (missing fields, wrong types)
 - ✅ Authentication gates (no token, invalid token, expired token)
@@ -267,12 +289,14 @@ e2e-track/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm
 - Supabase project (free tier works)
 - Google Gemini API key
 
 ### 1. Clone & Install
+
 ```bash
 git clone https://github.com/pranjal2410719/EcoTrack-AI-.git
 cd EcoTrack-AI-
@@ -285,6 +309,7 @@ cd ../frontend && npm install
 ### 2. Environment Variables
 
 **Backend** (`backend/.env`):
+
 ```env
 PORT=5001
 SUPABASE_URL=your_supabase_url
@@ -294,6 +319,7 @@ FRONTEND_URL=http://localhost:5173
 ```
 
 **Frontend** (`frontend/.env`):
+
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -301,9 +327,11 @@ VITE_API_URL=http://localhost:5001/api
 ```
 
 ### 3. Database Setup
+
 Run `backend/supabase-migration.sql` in your Supabase SQL Editor to create tables, indexes, and RLS policies.
 
 ### 4. Run the App
+
 ```bash
 # Terminal 1 — Backend
 cd backend && npm run dev
@@ -318,18 +346,19 @@ Open **[http://localhost:5173](http://localhost:5173)**
 
 ## 📡 API Endpoints
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/health` | ❌ | Health check |
-| POST | `/api/calculate` | ❌ | Calculate carbon score (no DB) |
-| POST | `/api/assessment` | ✅ | Save assessment + calculate score |
-| POST | `/api/analyze` | ✅ | Generate AI recommendations via Gemini |
-| GET | `/api/dashboard` | ✅ | Full dashboard data (parallel queries) |
-| POST | `/api/coach/chat` | ✅ | Chat with AI climate coach |
-| POST | `/api/simulate` | ❌ | Compare current vs target lifestyle |
-| GET | `/api/report` | ✅ | Aggregated data for PDF report |
+| Method | Endpoint          | Auth | Description                            |
+| ------ | ----------------- | ---- | -------------------------------------- |
+| GET    | `/api/health`     | ❌   | Health check                           |
+| POST   | `/api/calculate`  | ❌   | Calculate carbon score (no DB)         |
+| POST   | `/api/assessment` | ✅   | Save assessment + calculate score      |
+| POST   | `/api/analyze`    | ✅   | Generate AI recommendations via Gemini |
+| GET    | `/api/dashboard`  | ✅   | Full dashboard data (parallel queries) |
+| POST   | `/api/coach/chat` | ✅   | Chat with AI climate coach             |
+| POST   | `/api/simulate`   | ❌   | Compare current vs target lifestyle    |
+| GET    | `/api/report`     | ✅   | Aggregated data for PDF report         |
 
 ### Rate Limiting
+
 - **General API:** 100 requests per 15 minutes
 - **AI endpoints:** 20 requests per 15 minutes
 
@@ -337,20 +366,21 @@ Open **[http://localhost:5173](http://localhost:5173)**
 
 ## 🧮 Carbon Calculation
 
-| Category | Emission Factor | Example |
-|----------|----------------|---------|
-| 🚗 Transport | 0.21 kg CO₂ per km/week | 150 km → 31.5 kg |
-| ⚡ Electricity | 0.0008 kg CO₂ per ₹/month | ₹2500 → 2.0 kg |
-| ✈️ Flights | 90 kg CO₂ per flight/year | 3 flights → 270 kg |
-| 🛍️ Shopping | 5 kg CO₂ per order/month | 5 orders → 25 kg |
-| 🍽️ Diet | Vegan: 20 / Vegetarian: 50 / Meat: 100 | — |
+| Category       | Emission Factor                        | Example            |
+| -------------- | -------------------------------------- | ------------------ |
+| 🚗 Transport   | 0.21 kg CO₂ per km/week                | 150 km → 31.5 kg   |
+| ⚡ Electricity | 0.0008 kg CO₂ per ₹/month              | ₹2500 → 2.0 kg     |
+| ✈️ Flights     | 90 kg CO₂ per flight/year              | 3 flights → 270 kg |
+| 🛍️ Shopping    | 5 kg CO₂ per order/month               | 5 orders → 25 kg   |
+| 🍽️ Diet        | Vegan: 20 / Vegetarian: 50 / Meat: 100 | —                  |
 
 ### Carbon Levels
-| Level | Range | Badge |
-|-------|-------|-------|
-| 🟢 Low | < 200 kg | Eco Hero |
-| 🟡 Moderate | 200–500 kg | Moderate |
-| 🔴 High | > 500 kg | High Impact |
+
+| Level       | Range      | Badge       |
+| ----------- | ---------- | ----------- |
+| 🟢 Low      | < 200 kg   | Eco Hero    |
+| 🟡 Moderate | 200–500 kg | Moderate    |
+| 🔴 High     | > 500 kg   | High Impact |
 
 ---
 
@@ -380,22 +410,22 @@ Open **[http://localhost:5173](http://localhost:5173)**
 
 ## 📚 Documentation
 
-| Resource | Description |
-|----------|-------------|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture and design decisions |
-| [docs/API_REFERENCE.md](docs/API_REFERENCE.md) | Complete API reference with examples |
-| [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md) | Database tables, indexes, and RLS policies |
-| [context/](context/) | Development log, decisions, roadmap, score tracking |
+| Resource                                           | Description                                         |
+| -------------------------------------------------- | --------------------------------------------------- |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)       | System architecture and design decisions            |
+| [docs/API_REFERENCE.md](docs/API_REFERENCE.md)     | Complete API reference with examples                |
+| [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md) | Database tables, indexes, and RLS policies          |
+| [context/](context/)                               | Development log, decisions, roadmap, score tracking |
 
 ---
 
 ## 🏆 Hackathon Journey
 
-| Attempt | Score | Rank | Key Changes |
-|---------|-------|------|-------------|
-| Attempt 1 | 84 | — | Initial submission |
-| Attempt 2 | 91.22 | #60 / 29,932 | +Controller architecture, +52 tests, +ESLint, +JSDoc, +accessibility |
-| Attempt 3 | **Target: 95+** | **Target: Top 20** | +AI Coach, +Simulator, +Goals, +PDF Report, +Lazy loading, +Graceful fallback |
+| Attempt   | Score     | Rank             | Key Changes                                                                                                                |
+| --------- | --------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Attempt 1 | 84        | —                | Initial submission                                                                                                         |
+| Attempt 2 | 91.22     | #60 / 29,932     | +Controller architecture, +52 tests, +ESLint, +JSDoc, +accessibility                                                       |
+| Attempt 3 | **95.99** | **#21 / 30,040** | +AI Coach, +Simulator, +Goals, +PDF Report, +Lazy loading, +Graceful fallback, +Controller-Service architecture, +52 tests |
 
 ---
 

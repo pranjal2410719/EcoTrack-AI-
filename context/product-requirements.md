@@ -2,7 +2,7 @@
 
 ## MVP Goal
 Build a working prototype that demonstrates:
-1. User authentication via Clerk
+1. User authentication via Supabase Auth
 2. Carbon footprint assessment questionnaire
 3. Carbon score calculation
 4. Gemini-powered personalized sustainability insights
@@ -17,8 +17,8 @@ Build a working prototype that demonstrates:
 - Call-to-action button linking to sign-up
 
 ### FR2: Authentication
-- Sign-in and Sign-up pages via Clerk
-- Protected dashboard routes
+- Sign-in and Sign-up pages via Supabase Auth
+- Protected dashboard routes (JWT-based)
 - User profile management
 
 ### FR3: Carbon Assessment

@@ -9,8 +9,8 @@
 - Call-to-action button
 
 ### F2: Authentication ✅
-- Clerk-powered sign-in / sign-up
-- Protected dashboard routes
+- Supabase Auth sign-in / sign-up
+- Protected dashboard routes (JWT verification)
 - User session management
 
 ### F3: Carbon Assessment Form ✅

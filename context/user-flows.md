@@ -9,7 +9,7 @@ Landing Page
 Click "Start Tracking" CTA
     │
     ▼
-Clerk Sign-Up Page
+Supabase Auth Sign-Up Page
     │
     ▼
 Create Account (Google / Email)
@@ -36,7 +36,7 @@ View: Carbon Score, Level, Pie Chart, AI Recommendations, Progress
 ## Returning User Flow
 
 ```
-Login (Clerk Sign-In)
+Login (Supabase Auth Sign-In)
     │
     ▼
 Dashboard
@@ -84,5 +84,5 @@ Redirect to updated Dashboard
 - User can retry analysis from dashboard
 
 ### Unauthenticated access
-- Protected routes redirect to Clerk sign-in
+- Protected routes redirect to Supabase Auth sign-in
 - After sign-in, redirect back to intended page
